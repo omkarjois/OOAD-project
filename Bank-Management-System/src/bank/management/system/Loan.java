@@ -189,9 +189,8 @@ public class Loan extends JFrame {
                 // Insert loan application into database
                 // Format the date properly before inserting into the database
                 java.sql.Date date = new java.sql.Date(new Date().getTime());
-                String insertQuery = "INSERT INTO Loan ( CustomerID, Amount, LoanCleared, InterestRate, Tenure, LoanDetails, LoanConditions, DateApplied) VALUES " +
-                        "( "+customerId+", " + loanAmount + ", NULL, " + INTEREST_RATE + ", " + loanTenure + ", NULL, NULL, " +
-                        "'" + date + "')";
+                String insertQuery = "INSERT INTO Loan ( CustomerID, Amount, LoanCleared, InterestRate, Tenure, LoanDetails, LoanConditions, DateApplied) VALUES " + "(" +
+                        customerId+ "," + loanAmount + ", NULL, " + INTEREST_RATE + ", " + loanTenure + ", NULL, NULL, '" + date + "')";
 
                 int rowsAffected = connection.executeUpdate(insertQuery);
                 if (rowsAffected > 0) {
