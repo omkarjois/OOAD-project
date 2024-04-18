@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2f87aa14-038a-411c-9474-dd26473e21a0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/AccountDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/AccountDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/AccountsOverview.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/AccountsOverview.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,28 +44,13 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="LoansDisplayPage" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="bank.management.system.LoansDisplayPage" />
-      <module name="OOAD-project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="bank.management.system.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -79,6 +70,7 @@
       <workItem from="1713373127646" duration="857000" />
       <workItem from="1713412623269" duration="541000" />
       <workItem from="1713420702248" duration="347000" />
+      <workItem from="1713421054156" duration="1039000" />
     </task>
     <servers />
   </component>
