@@ -61,10 +61,7 @@ public class Login extends JFrame {
 
         try {
             // Establish database connection (replace databaseUrl, username, and password with your own)
-            String databaseUrl = "jdbc:mysql://localhost:3306/bankSystem";
-            String username = "root";
-            String passwordDb = "omkar2003";
-            connection = DriverManager.getConnection(databaseUrl, username, passwordDb);
+            connection = new Connn().connection;
 
             // Prepare SQL statement
             String sql = "SELECT * FROM Customer WHERE CustomerID = ? AND _password = ?";
