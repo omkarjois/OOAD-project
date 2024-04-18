@@ -50,7 +50,7 @@ public class Home extends JFrame {
         profileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Profile(Integer.parseInt(customerID));
+                new Profile.ProfileBuilder(Integer.parseInt(customerID)).build();
                 setVisible(false);
             }
         });
