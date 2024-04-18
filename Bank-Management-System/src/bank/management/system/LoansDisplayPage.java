@@ -1,4 +1,5 @@
 package bank.management.system;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -9,9 +10,67 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+interface ButtonFactory {
+    JButton createButton();
+}
+
+class BackToHomeButtonFactory implements ButtonFactory {
+    private final LoansDisplayPage context;
+
+    public BackToHomeButtonFactory(LoansDisplayPage context) {
+        this.context = context;
+    }
+
+    @Override
+    public JButton createButton() {
+        JButton backButton = new JButton("Back to Home");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Open Home.java
+                        new Home(context.connection.toString()).setVisible(true);
+                        // Close current window
+                        context.dispose();
+                    }
+                });
+            }
+        });
+        return backButton;
+    }
+}
+
+class NewLoanButtonFactory implements ButtonFactory {
+    private final LoansDisplayPage context;
+
+    public NewLoanButtonFactory(LoansDisplayPage context) {
+        this.context = context;
+    }
+
+    @Override
+    public JButton createButton() {
+        JButton newLoanButton = new JButton("New Loan");
+        newLoanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Open new loan application page (Loan.java)
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new Loan(String.valueOf(context.customerID)).setVisible(true);
+                    }
+                });
+            }
+        });
+        return newLoanButton;
+    }
+}
+
 public class LoansDisplayPage extends JFrame {
-    private final Connn connection;
-    private final int customerID; // Customer ID passed from the other page
+    final Connn connection;
+    final int customerID; // Customer ID passed from the other page
 
     public LoansDisplayPage(Connn connection, int customerID) {
         super("Loan Display Page");
@@ -33,7 +92,7 @@ public class LoansDisplayPage extends JFrame {
         // Create panel to hold loan table
         JPanel loanTablePanel = createLoanTablePanel();
 
-        // Create panel to hold New Loan button
+        // Create panel to hold buttons
         JPanel buttonPanel = createButtonPanel();
 
         // Add components to the frame
@@ -207,26 +266,19 @@ public class LoansDisplayPage extends JFrame {
     }
 
     private JPanel createButtonPanel() {
-        JPanel buttonPanel = new JPanel();
-        JButton newLoanButton = new JButton("New Loan");
+        JPanel buttonPanel = new JPanel(new BorderLayout());
 
-        newLoanButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open new loan application page (Loan.java)
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        new Loan(String.valueOf(customerID)).setVisible(true); // Assuming Loan.java is the name of the new
-                        // loan
-                        // application
-                        // page
-                    }
-                });
-            }
-        });
+        // Create Back to Home button using factory
+        ButtonFactory backButtonFactory = new BackToHomeButtonFactory(this);
+        JButton backButton = backButtonFactory.createButton();
 
-        buttonPanel.add(newLoanButton);
+        // Create New Loan button using factory
+        ButtonFactory newLoanButtonFactory = new NewLoanButtonFactory(this);
+        JButton newLoanButton = newLoanButtonFactory.createButton();
+
+        // Add buttons to button panel
+        buttonPanel.add(backButton, BorderLayout.WEST);
+        buttonPanel.add(newLoanButton, BorderLayout.EAST);
         return buttonPanel;
     }
 
