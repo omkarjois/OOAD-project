@@ -206,16 +206,16 @@ public class Profile extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Profile frame = new Profile.ProfileBuilder(1).editable(true).build(); // Replace with the actual customer ID
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                try {
+//                    Profile frame = new Profile.ProfileBuilder(1).editable(true).build(); // Replace with the actual customer ID
+//                    frame.setVisible(true);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 }

@@ -5,15 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f87aa14-038a-411c-9474-dd26473e21a0" name="Changes" comment="">
-
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/AccountDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/AccountDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/AccountsOverview.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/AccountsOverview.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/AccountsOverview.class" afterDir="false" />
-
+      <change beforePath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Connn.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Connn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Connn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Connn.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,28 +36,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.HomePage.executor": "Run",
-    "Application.LoansDisplayPage.executor": "Run",
-    "Application.Login.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/nidhisingh/IdeaProjects/OOAD-project",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HomePage.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LoansDisplayPage.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Login.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/nidhisingh/IdeaProjects/OOAD-project&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -72,9 +77,7 @@
       <workItem from="1713373127646" duration="857000" />
       <workItem from="1713412623269" duration="541000" />
       <workItem from="1713420702248" duration="347000" />
-
       <workItem from="1713421054156" duration="1039000" />
-
     </task>
     <servers />
   </component>
