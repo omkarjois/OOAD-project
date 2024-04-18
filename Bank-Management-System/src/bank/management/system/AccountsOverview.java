@@ -1,16 +1,23 @@
 package bank.management.system;
 
-import java.sql.SQLException;
-import java.sql.ResultSet;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AccountsOverview extends JFrame {
 
     private Connn connectionManager;
     private int customerId;
+
+    private static final Map<String, AccountDisplayStrategy> STRATEGY_MAP = new HashMap<>();
+
+    static {
+        STRATEGY_MAP.put("savings", new SavingsAccountDisplayStrategy());
+        STRATEGY_MAP.put("checking", new CheckingAccountDisplayStrategy());
+    }
 
     public AccountsOverview(int customerId) {
         this.customerId = customerId;
@@ -18,12 +25,11 @@ public class AccountsOverview extends JFrame {
         setTitle("Accounts Overview");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
-        setLocationRelativeTo(null); // Center the frame on the screen
+        setLocationRelativeTo(null);
         setVisible(true);
 
-        // Create a panel for the accounts
-        JPanel accountsPanel = new JPanel(new GridLayout(0, 1, 10, 10)); // Dynamic rows, with horizontal and vertical gaps
-        accountsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
+        JPanel accountsPanel = new JPanel();
+        accountsPanel.setLayout(new BoxLayout(accountsPanel, BoxLayout.Y_AXIS));
 
         try {
             displayAccounts(accountsPanel);
@@ -31,24 +37,18 @@ public class AccountsOverview extends JFrame {
             throw new RuntimeException(e);
         }
 
-        // Create a scroll pane for the accounts panel
         JScrollPane scrollPane = new JScrollPane(accountsPanel);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Create a panel for the back button
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(100, 30)); // Set button size
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new Home(String.valueOf(customerId));
-            }
+        backButton.setPreferredSize(new Dimension(100, 30));
+        backButton.addActionListener(e -> {
+            setVisible(false);
+            new Home(String.valueOf(customerId));
         });
         buttonPanel.add(backButton);
 
-        // Add the components to the main panel
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
@@ -60,21 +60,18 @@ public class AccountsOverview extends JFrame {
         String query = "SELECT AccountNumber, IFSC, AccountType FROM Account WHERE customerId = " + customerId;
 
         try (ResultSet rs = connectionManager.statement.executeQuery(query)) {
+            int accountCount = 1;
             while (rs.next()) {
                 int accountNumber = rs.getInt("AccountNumber");
                 String ifscCode = rs.getString("IFSC");
                 String accountType = rs.getString("AccountType");
 
-                AccountFactory accountFactory;
-                if (accountType.equalsIgnoreCase("savings")) {
-                    accountFactory = new SavingsAccountFactory();
-                } else if (accountType.equalsIgnoreCase("checking")) {
-                    accountFactory = new CheckingAccountFactory();
-                } else {
+                if (!STRATEGY_MAP.containsKey(accountType.toLowerCase())) {
                     continue;
                 }
 
-                AbstractAccount account = accountFactory.createAccount(accountNumber, ifscCode);
+                AccountDisplayStrategy strategy = STRATEGY_MAP.get(accountType.toLowerCase());
+                AbstractAccount account = new AbstractAccount(strategy, accountNumber, ifscCode, accountCount);
 
                 JPanel accountPanel = new JPanel(new BorderLayout());
                 accountPanel.setBorder(BorderFactory.createCompoundBorder(
@@ -82,85 +79,101 @@ public class AccountsOverview extends JFrame {
                         BorderFactory.createLineBorder(Color.GRAY, 1)
                 ));
 
-                JLabel accountLabel = new JLabel("Account: " + accountNumber);
+                JLabel accountLabel = new JLabel("Account: " + accountCount);
                 accountLabel.setFont(new Font("Arial", Font.BOLD, 14));
                 accountPanel.add(accountLabel, BorderLayout.NORTH);
 
-                JPanel detailsPanel = new JPanel(new GridLayout(3, 2, 10, 10));
-                detailsPanel.add(new JLabel("Account Number:"));
-                detailsPanel.add(new JLabel(String.valueOf(accountNumber)));
-                detailsPanel.add(new JLabel("IFSC Code:"));
-                detailsPanel.add(new JLabel(ifscCode));
-                detailsPanel.add(new JLabel("Account Type:"));
-                detailsPanel.add(new JLabel(accountType));
+                JPanel detailsPanel = strategy.createPanel(accountNumber, ifscCode, accountCount);
                 accountPanel.add(detailsPanel, BorderLayout.CENTER);
 
                 JButton viewDetails = new JButton("View Details");
                 viewDetails.setPreferredSize(new Dimension(120, 30));
-                viewDetails.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        account.displayDetails();
-                    }
+                viewDetails.addActionListener(e -> {
+                    setVisible(false);
+                    new AccountDetails(customerId, accountNumber);  // Open AccountDetails with necessary values
                 });
                 accountPanel.add(viewDetails, BorderLayout.SOUTH);
 
                 panel.add(accountPanel);
+                accountCount++;
             }
         }
     }
 
-    // AbstractProduct
-    interface AbstractAccount {
-        void displayDetails();
+    private static class SavingsAccountDisplayStrategy implements AccountDisplayStrategy {
+        @Override
+        public JPanel createPanel(int accountNumber, String ifscCode, int accountCount) {
+            JPanel detailsPanel = new JPanel(new GridLayout(4, 2));
+            detailsPanel.add(new JLabel("Account: " + accountCount));
+            detailsPanel.add(new JLabel("Account Number:"));
+            detailsPanel.add(new JLabel(String.valueOf(accountNumber)));
+            detailsPanel.add(new JLabel("IFSC Code:"));
+            detailsPanel.add(new JLabel(ifscCode));
+            detailsPanel.add(new JLabel("Account Type:"));
+            detailsPanel.add(new JLabel("Savings"));
+            detailsPanel.add(new JLabel("Interest Rate:"));
+            detailsPanel.add(new JLabel("5%"));
+            return detailsPanel;
+        }
     }
 
-    // ConcreteProducts
-    class SavingsAccount implements AbstractAccount {
-        private int accountNumber;
-        private String ifscCode;
+    private static class CheckingAccountDisplayStrategy implements AccountDisplayStrategy {
+        @Override
+        public JPanel createPanel(int accountNumber, String ifscCode, int accountCount) {
+            JPanel detailsPanel = new JPanel(new GridLayout(4, 2));
+            detailsPanel.add(new JLabel("Account: " + accountCount));
+            detailsPanel.add(new JLabel("Account Number:"));
+            detailsPanel.add(new JLabel(String.valueOf(accountNumber)));
+            detailsPanel.add(new JLabel("IFSC Code:"));
+            detailsPanel.add(new JLabel(ifscCode));
+            detailsPanel.add(new JLabel("Account Type:"));
+            detailsPanel.add(new JLabel("Checking"));
+            detailsPanel.add(new JLabel("Overdraft Limit:"));
+            detailsPanel.add(new JLabel("$500"));
+            return detailsPanel;
+        }
+    }
 
-        public SavingsAccount(int accountNumber, String ifscCode) {
+    private static class AbstractAccount {
+        private final AccountDisplayStrategy strategy;
+        private final int accountNumber;
+        private final String ifscCode;
+        private final int accountCount;
+
+        public AbstractAccount(AccountDisplayStrategy strategy, int accountNumber, String ifscCode, int accountCount) {
+            this.strategy = strategy;
             this.accountNumber = accountNumber;
             this.ifscCode = ifscCode;
+            this.accountCount = accountCount;
         }
 
-        public void displayDetails() {
-            System.out.println("Savings Account Number: " + accountNumber);
-            System.out.println("IFSC Code: " + ifscCode);
-        }
-    }
+        public JPanel createPanel() {
+            JPanel accountPanel = new JPanel(new BorderLayout());
+            accountPanel.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createEmptyBorder(10, 10, 10, 10),
+                    BorderFactory.createLineBorder(Color.GRAY, 1)
+            ));
 
-    class CheckingAccount implements AbstractAccount {
-        private int accountNumber;
-        private String ifscCode;
+            JLabel accountLabel = new JLabel("Account: " + accountCount);
+            accountLabel.setFont(new Font("Arial", Font.BOLD, 14));
+            accountPanel.add(accountLabel, BorderLayout.NORTH);
 
-        public CheckingAccount(int accountNumber, String ifscCode) {
-            this.accountNumber = accountNumber;
-            this.ifscCode = ifscCode;
-        }
+            JPanel detailsPanel = strategy.createPanel(accountNumber, ifscCode, accountCount);
+            accountPanel.add(detailsPanel, BorderLayout.CENTER);
 
-        public void displayDetails() {
-            System.out.println("Checking Account Number: " + accountNumber);
-            System.out.println("IFSC Code: " + ifscCode);
-        }
-    }
+            JButton viewDetails = new JButton("View Details");
+            viewDetails.setPreferredSize(new Dimension(120, 30));
+            viewDetails.addActionListener(e -> {
+                // Handle view details action
+                JOptionPane.showMessageDialog(accountPanel, "View Details for Account " + accountCount);
+            });
+            accountPanel.add(viewDetails, BorderLayout.SOUTH);
 
-    // AbstractFactory
-    interface AccountFactory {
-        AbstractAccount createAccount(int accountNumber, String ifscCode);
-    }
-
-    // ConcreteFactories
-    class SavingsAccountFactory implements AccountFactory {
-        public AbstractAccount createAccount(int accountNumber, String ifscCode) {
-            return new SavingsAccount(accountNumber, ifscCode);
+            return accountPanel;
         }
     }
 
-    class CheckingAccountFactory implements AccountFactory {
-        public AbstractAccount createAccount(int accountNumber, String ifscCode) {
-            return new CheckingAccount(accountNumber, ifscCode);
-        }
+    private interface AccountDisplayStrategy {
+        JPanel createPanel(int accountNumber, String ifscCode, int accountCount);
     }
 }
