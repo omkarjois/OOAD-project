@@ -6,19 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2f87aa14-038a-411c-9474-dd26473e21a0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Connn.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Connn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Connn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Connn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Bank-Management-System/src/bank/management/system/HomePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Home.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOAD-project/bank/management/system/Profile.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

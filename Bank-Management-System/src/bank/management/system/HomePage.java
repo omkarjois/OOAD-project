@@ -25,7 +25,7 @@ public class HomePage extends JFrame {
         add(loginButton);
         add(signUpButton);
 
-        JLabel labelHeading = new JLabel("Welcome to Raghu Online Bank:");
+        JLabel labelHeading = new JLabel("Welcome to the Online Bank:");
         labelHeading.setFont(new Font("Raleway", Font.BOLD, 25));
         labelHeading.setBounds(220,50,500,30);
         add(labelHeading);

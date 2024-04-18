@@ -12,47 +12,68 @@ public class Home extends JFrame {
         this.customerID = customerID;
         setTitle("Home Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(850, 600); // Adjusted height for better layout
+        setSize(850, 600);
+        setLocationRelativeTo(null); // Center the frame on the screen
 
-        // Create a panel for the top section with customer ID label
-        JPanel topPanel = new JPanel();
-        topPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Left-aligned layout
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout()); // Using GridBagLayout for flexible layout
+        panel.setBackground(Color.WHITE); // Set background color
 
-        JLabel customerIDLabel = new JLabel("Customer ID: " + customerID);
-        topPanel.add(customerIDLabel);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(20, 20, 20, 20); // Adding insets for spacing
 
-        // Create a panel for the buttons
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2, 2, 10, 10)); // Grid layout with spacing
+        JLabel titleLabel = new JLabel("Welcome to Your Bank");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(Color.BLACK); // Set text color
+        panel.add(titleLabel, gbc);
 
-        JButton accountsButton = createButton("Accounts Overview");
+        gbc.gridy++;
+        JButton accountsButton = new JButton("Accounts Overview");
+        customizeButton(accountsButton);
         accountsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Code to open Accounts Overview page
                 new AccountsOverview(Integer.parseInt(customerID));
                 setVisible(false);
             }
         });
+        panel.add(accountsButton, gbc);
 
-        JButton loansButton = createButton("Loans");
+        gbc.gridy++;
+        JButton loansButton = new JButton("Loans");
+        customizeButton(loansButton);
         loansButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Code to open Loans page
                 new LoansDisplayPage(new Connn(), Integer.parseInt(customerID));
                 setVisible(false);
             }
         });
+        panel.add(loansButton, gbc);
 
-        JButton paymentButton = createButton("Payment");
+        gbc.gridy++;
+        JButton paymentButton = new JButton("Payment");
+        customizeButton(paymentButton);
         paymentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Code to open Payment page
                 new Payment(customerID);
                 setVisible(false);
             }
         });
+        panel.add(paymentButton, gbc);
 
-        JButton profileButton = createButton("Profile");
+        gbc.gridy++;
+        JButton profileButton = new JButton("Profile");
+        customizeButton(profileButton);
         profileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,22 +81,27 @@ public class Home extends JFrame {
                 setVisible(false);
             }
         });
+        panel.add(profileButton, gbc);
 
-        buttonPanel.add(accountsButton);
-        buttonPanel.add(loansButton);
-        buttonPanel.add(paymentButton);
-        buttonPanel.add(profileButton);
-
-        // Add both panels to the main frame with BorderLayout
-        add(topPanel, BorderLayout.NORTH);
-        add(buttonPanel, BorderLayout.CENTER);
-
+        add(panel);
         setVisible(true);
     }
 
-    private JButton createButton(String text) {
-        JButton button = new JButton(text);
-        button.setPreferredSize(new Dimension(200, 50)); // Set preferred size for buttons
-        return button;
+    private void customizeButton(JButton button) {
+        button.setBackground(Color.BLACK); // Customizing button background color
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Arial", Font.BOLD, 18));
+        button.setFocusPainted(false); // Removing focus border
+        button.setPreferredSize(new Dimension(200, 50)); // Setting preferred button size
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // Sample usage
+                Home home = new Home("123456"); // Replace "123456" with actual customer ID
+            }
+        });
     }
 }
