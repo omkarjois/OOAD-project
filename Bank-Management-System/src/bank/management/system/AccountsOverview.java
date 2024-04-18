@@ -23,8 +23,12 @@ public class AccountsOverview extends JFrame {
 
         // Create a panel for the accounts
         JPanel accountsPanel = new JPanel(new GridLayout(0, 1, 10, 10)); // Dynamic rows, with horizontal and vertical gaps
-        accountsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
-
+        accountsPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 10)); // Add padding
+        JLabel headingLabel = new JLabel("List of Accounts", SwingConstants.CENTER);
+        headingLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        JPanel headingPanel = new JPanel(new BorderLayout());
+        headingPanel.add(headingLabel, BorderLayout.CENTER);
+        accountsPanel.add(headingPanel);
         try {
             displayAccounts(accountsPanel);
         } catch (SQLException e) {
@@ -33,7 +37,7 @@ public class AccountsOverview extends JFrame {
 
         // Create a scroll pane for the accounts panel
         JScrollPane scrollPane = new JScrollPane(accountsPanel);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10)); // Add padding
 
         // Create a panel for the back button
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -55,7 +59,7 @@ public class AccountsOverview extends JFrame {
 
         add(mainPanel);
     }
-
+    // In the AccountsOverview class
     private void displayAccounts(JPanel panel) throws SQLException {
         String query = "SELECT AccountNumber, IFSC, AccountType FROM Account WHERE customerId = " + customerId;
 
@@ -100,7 +104,8 @@ public class AccountsOverview extends JFrame {
                 viewDetails.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        account.displayDetails();
+                        setVisible(false); // Hide the current frame
+                        new AccountDetails(customerId,accountNumber); // Open the AccountDetails frame with the account number
                     }
                 });
                 accountPanel.add(viewDetails, BorderLayout.SOUTH);
@@ -109,7 +114,6 @@ public class AccountsOverview extends JFrame {
             }
         }
     }
-
     // AbstractProduct
     interface AbstractAccount {
         void displayDetails();

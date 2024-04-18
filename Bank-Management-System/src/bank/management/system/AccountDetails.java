@@ -70,36 +70,66 @@ class CheckingAccountFactory implements AccountFactory {
 public class AccountDetails extends JFrame {
 
     private Connn connectionManager;
+    private int customerId;
 
-    public AccountDetails(int accountNumber) {
+    public AccountDetails(int customerId, int accountNumber) {
+        this.customerId = customerId;  // Store customer ID for AccountsOverview
         this.connectionManager = new Connn();
         setTitle("Account Details");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Dispose this frame on close
         setSize(1000, 600);
         setLocationRelativeTo(null); // Center the frame on the screen
         setVisible(true);
 
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
+        // Create main panel with slight padding
+        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        // Account details panel with a titled border
         JPanel detailsPanel = new JPanel(new BorderLayout());
-        detailsPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Account Details"));
+        detailsPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Account Balance"));
 
+        // Text area for account details (non-editable)
         JTextArea detailsArea = new JTextArea();
         detailsArea.setEditable(false);
         detailsArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
         detailsPanel.add(new JScrollPane(detailsArea), BorderLayout.CENTER);
 
+        // Transactions panel with a titled border
         JPanel transactionsPanel = new JPanel(new BorderLayout());
         transactionsPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Recent Transactions"));
 
+        // Text area for transactions (non-editable)
         JTextArea transactionsArea = new JTextArea();
         transactionsArea.setEditable(false);
         transactionsArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
         transactionsPanel.add(new JScrollPane(transactionsArea), BorderLayout.CENTER);
 
+        // Add panels to main panel
         mainPanel.add(detailsPanel, BorderLayout.NORTH);
         mainPanel.add(transactionsPanel, BorderLayout.CENTER);
+
+        // Back button with custom styling
+        JButton backButton = new JButton("Back");
+        backButton.setPreferredSize(new Dimension(100, 30));
+        backButton.setBackground(new Color(0, 128, 128)); // Teal color
+        backButton.setForeground(Color.WHITE);
+        backButton.setFont(new Font("Arial", Font.BOLD, 12));
+        backButton.setBorder(BorderFactory.createRaisedBevelBorder()); // Raised border for a 3D effect
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false); // Hide the current frame
+                new AccountsOverview(customerId); // Open AccountsOverview with the stored customer ID
+            }
+        });
+
+        // Create a separate panel for the button to align it to the right
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0)); // Right alignment, no horizontal/vertical gaps
+        buttonPanel.add(backButton);
+
+        // Add button panel to the bottom of the main panel
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
 
@@ -109,6 +139,7 @@ public class AccountDetails extends JFrame {
             throw new RuntimeException(e);
         }
     }
+
 
     private void displayDetails(JTextArea detailsArea, JTextArea transactionsArea, int accountNumber) throws SQLException {
         // Get account balance and IFSC code
@@ -131,7 +162,7 @@ public class AccountDetails extends JFrame {
 
         // Update details area
         StringBuilder details = new StringBuilder();
-        details.append("Account Number: " + accountNumber + "\n\n");
+        details.append("Account Balance: " + balance + "\n\n");
         account.displayDetails(); // Display account details using the AbstractAccount implementation
         detailsArea.setText(details.toString());
 
