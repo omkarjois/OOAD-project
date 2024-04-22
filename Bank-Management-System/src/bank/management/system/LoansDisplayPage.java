@@ -181,7 +181,7 @@ public class LoansDisplayPage extends JFrame {
         tableModel.addColumn("Amount in Rupees");
         tableModel.addColumn("Interest Rate");
         tableModel.addColumn("Tenure in years");
-        tableModel.addColumn("Pay EMI");
+        // tableModel.addColumn("Pay EMI");
 
         // Fetch and populate loan data
         String query = "SELECT * FROM Loan WHERE CustomerID = ?";
@@ -195,8 +195,8 @@ public class LoansDisplayPage extends JFrame {
                         resultSet.getInt("LoanID"),
                         resultSet.getDouble("Amount"),
                         resultSet.getDouble("InterestRate"),
-                        resultSet.getInt("Tenure"),
-                        "Pay EMI"
+                        resultSet.getInt("Tenure")
+                        //"Pay EMI"
                 };
                 tableModel.addRow(rowData);
             }
@@ -206,9 +206,9 @@ public class LoansDisplayPage extends JFrame {
         }
 
         // Add button renderer and editor for the "Pay EMI" column
-        ButtonRenderer buttonRenderer = new ButtonRenderer();
-        loanTable.getColumnModel().getColumn(4).setCellRenderer(buttonRenderer);
-        loanTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JTextField()));
+//        ButtonRenderer buttonRenderer = new ButtonRenderer();
+//        loanTable.getColumnModel().getColumn(4).setCellRenderer(buttonRenderer);
+//        loanTable.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JTextField()));
 
         // Set font size and style for table headers
         Font headerFont = loanTable.getTableHeader().getFont();
@@ -252,6 +252,7 @@ public class LoansDisplayPage extends JFrame {
             ((JButton) editorComponent).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    editorComponent.requestFocusInWindow();
                     JOptionPane.showMessageDialog(LoansDisplayPage.this, "EMI paid for Loan ID: " + label);
                 }
             });
